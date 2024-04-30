@@ -27,10 +27,10 @@ const Home = () => {
     return ( 
         <div className="home">
            {blogs.map((blog) => (
-                <dib className="blog-preview" key={blog.id}>
+                <div className="blog-preview" key={blog.id}>
                     <h2>{blog.title}</h2>
                     <p>Escrito por {blog.author}</p>
-                </dib>
+                </div>
            ))}
            
         </div>
