@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BlogList from "./BlogList";
 
 const Home = () => {
@@ -23,6 +23,10 @@ const Home = () => {
             id: 3
         },
     ]);
+
+    useEffect(() => {
+        console.log('chamei useEffect');
+    });
    
     const handleDelete = (id) => {
         const newBlogs = blogs.filter(blog => blog.id !== id);
