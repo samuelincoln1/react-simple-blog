@@ -3,29 +3,18 @@ import { useState, useEffect } from "react";
 import BlogList from "./BlogList";
 
 const Home = () => {
-    const [blogs, setBlogs] = useState([
-        {
-            title: 'Novo website',
-            body: 'lorem ipsum...',
-            author: 'samuel',
-            id: 1
-        },
-        {
-            title: 'Festa de boas vindas!',
-            body: 'lorem ipsum...',
-            author: 'mario',
-            id: 2
-        },
-        {
-            title: 'Novidades de tecnologia',
-            body: 'lorem ipsum...',
-            author: 'samuel',
-            id: 3
-        },
-    ]);
+    const [blogs, setBlogs] = useState(null);
 
     useEffect(() => {
-        console.log('chamei useEffect');
+       fetch('http://localhost:8000/blogs')
+        .then(res => {
+           return res.json();
+        })
+        .then(data => {
+            console.log(data);
+            setBlogs(data);
+        });
+
     }, []);
    
     const handleDelete = (id) => {
@@ -35,8 +24,8 @@ const Home = () => {
 
     return ( 
         <div className="home">
-         <BlogList blogs={blogs} title="Todos os blogs" handleDelete={handleDelete}/>
-         <BlogList blogs={blogs.filter((blog) => blog.author === 'samuel')} title="Blogs do samuel" handleDelete={handleDelete}/>
+            {blogs && <BlogList blogs={blogs} title="Todos os blogs" handleDelete={handleDelete}/>}
+            {/* <BlogList blogs={blogs.filter((blog) => blog.author === 'samuel')} title="Blogs do samuel" handleDelete={handleDelete}/>  */}
        
 
 
