@@ -26,7 +26,7 @@ const Home = () => {
 
     useEffect(() => {
         console.log('chamei useEffect');
-    });
+    }, []);
    
     const handleDelete = (id) => {
         const newBlogs = blogs.filter(blog => blog.id !== id);
@@ -36,11 +36,10 @@ const Home = () => {
     return ( 
         <div className="home">
          <BlogList blogs={blogs} title="Todos os blogs" handleDelete={handleDelete}/>
-         <BlogList 
-            blogs={blogs.filter((blog) => blog.author === 'samuel')} 
-            title="Blogs do samuel" 
-            handleDelete={handleDelete}/>
-           
+         <BlogList blogs={blogs.filter((blog) => blog.author === 'samuel')} title="Blogs do samuel" handleDelete={handleDelete}/>
+       
+
+
         </div>
      );
 }
