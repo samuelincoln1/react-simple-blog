@@ -4,27 +4,26 @@ import BlogList from "./BlogList";
 
 const Home = () => {
     const [blogs, setBlogs] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-       fetch('http://localhost:8000/blogs')
-        .then(res => {
-           return res.json();
-        })
-        .then(data => {
-            console.log(data);
-            setBlogs(data);
-        });
-
+        setTimeout(() => {
+            fetch('http://localhost:8000/blogs')
+            .then(res => {
+               return res.json();
+            })
+            .then(data => {
+                setBlogs(data);
+                setIsLoading(false);
+            });
+        }, 1000);
     }, []);
    
-    const handleDelete = (id) => {
-        const newBlogs = blogs.filter(blog => blog.id !== id);
-        setBlogs(newBlogs);     
-    }
 
     return ( 
         <div className="home">
-            {blogs && <BlogList blogs={blogs} title="Todos os blogs" handleDelete={handleDelete}/>}
+            {isLoading && <div>Carregando...</div>}
+            {blogs && <BlogList blogs={blogs} title="Todos os blogs"/>}
             {/* <BlogList blogs={blogs.filter((blog) => blog.author === 'samuel')} title="Blogs do samuel" handleDelete={handleDelete}/>  */}
        
 
